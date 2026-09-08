@@ -51,10 +51,10 @@ const getLeaderBoardItem = async (req, res) => {
 };
 
 const createLeaderBoard = async (req, res) => {
-  const { deanery_id, parish_id, event_id, position_id } = req.body;
+  const { deanery_id, parish_id, event_id, position_id, year_id } = req.body;
   const sql =
-    "INSERT INTO `leader_board` (`deanery_id`, `parish_id`, `event_id`, `position_id`) VALUES (?, ?, ?, ?)";
-  const values = [deanery_id, parish_id, event_id, position_id];
+    "INSERT INTO `leader_board` (`deanery_id`, `parish_id`, `event_id`, `position_id`, `year_id`) VALUES (?, ?, ?, ?, ?)";
+  const values = [deanery_id, parish_id, event_id, position_id, year_id];
   try {
     const result = await db.query(sql, values);
     if (result.affectedRows > 0) {
@@ -72,11 +72,11 @@ const addLeaderBoardBatch = (req, res) => {
   const records = req.body;
 
   const sql =
-    "INSERT IGNORE INTO `leader_board` (`deanery_id`, `parish_id`, `event_id`, `position_id`) VALUES (?, ?, ?, ?)";
+    "INSERT IGNORE INTO `leader_board` (`deanery_id`, `parish_id`, `event_id`, `position_id`, `year_id`) VALUES (?, ?, ?, ?, ?)";
 
   const insertPromises = records.map(
-    ({ deanery_id, parish_id, event_id, position_id }) => {
-      const values = [deanery_id, parish_id, event_id, position_id];
+    ({ deanery_id, parish_id, event_id, position_id, year_id }) => {
+      const values = [deanery_id, parish_id, event_id, position_id, year_id];
 
       return new Promise(async (resolve, reject) => {
         try {
@@ -120,10 +120,10 @@ const deleteLeaderBoard = async (req, res) => {
 };
 
 const updateLeaderBoard = async (req, res) => {
-  const { deanery_id, parish_id, event_id, position_id, id } = req.body;
+  const { deanery_id, parish_id, event_id, position_id, year_id, id } = req.body;
   const sql =
-    "UPDATE `leader_board` SET `deanery_id`=?, `parish_id`=?, `event_id`=?, `position_id`=? WHERE `id`=?";
-  const values = [deanery_id, parish_id, event_id, position_id, id];
+    "UPDATE `leader_board` SET `deanery_id`=?, `parish_id`=?, `event_id`=?, `position_id`=?, `year_id`=? WHERE `id`=?";
+  const values = [deanery_id, parish_id, event_id, position_id, year_id, id];
   try {
     const result = await db.query(sql, values);
     if (result.affectedRows > 0) {

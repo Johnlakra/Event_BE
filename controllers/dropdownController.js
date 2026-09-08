@@ -7,6 +7,7 @@ const DROPDOWN_TABLES = {
   parish: "parish",
   stage: "stage",
   leader_board: "leader_board",
+  year: "year",
 };
 
 const getDropdown = async (req, res) => {
