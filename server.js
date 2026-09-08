@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+// v1
 const deanery = require("./routes/deanery");
 const position = require("./routes/position");
 const event = require("./routes/event");
@@ -18,6 +19,8 @@ const parish = require("./routes/parish");
 const dropdown = require("./routes/dropdown");
 const stage = require('./routes/stage')
 const liveonstage = require('./routes/liveonstage')
+// v2
+const leaderBoardv2 = require("./routes/v2/leaderBoard");
 
 const { logger } = require("./middleware/logEvents");
 const port = process.env.PORT || 3500;
@@ -34,6 +37,8 @@ app.use("/parish", parish);
 app.use("/dropdown", dropdown);
 app.use("/stage", stage);
 app.use('/liveonstage',liveonstage)
+
+app.use("/v2/leaderBoard", leaderBoardv2);
 
 app.use((req, res) => {
   return res.status(404).json({ message: "Not Found" });
