@@ -41,7 +41,7 @@ app.use('/liveonstage',liveonstage)
 app.use("/v2/leaderBoard", leaderBoardv2);
 
 app.use((req, res) => {
-  return res.status(404).json({ message: "Not Found" });
+  return res.status(404).json({ code: 404, message: "Not Found" });
 });
 
 // eslint-disable-next-line no-unused-vars
