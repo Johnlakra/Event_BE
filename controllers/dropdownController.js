@@ -14,7 +14,10 @@ const getDropdown = async (req, res) => {
   const keys = Object.keys(DROPDOWN_TABLES);
   try {
     const results = await Promise.all(
-      keys.map((key) => db.query(`SELECT * FROM \`${DROPDOWN_TABLES[key]}\``))
+      keys.map((key) => {
+        if(key === 'deanery') return db.query(`SELECT * FROM \`${DROPDOWN_TABLES[key]}\` ORDER BY \`name\``)
+        return db.query(`SELECT * FROM \`${DROPDOWN_TABLES[key]}\``)
+      })
     );
     return res.json(
       keys.reduce((acc, key, index) => ({ ...acc, [key]: results[index] }), {})
